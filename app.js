@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mongo = require('./db');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users.route');
 const mongoRouter = require('./routes/mongo');
 const productRouter = require('./routes/product.route');
 
