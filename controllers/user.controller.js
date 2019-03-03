@@ -38,3 +38,9 @@ exports.user_delete = function (req, res, next) {
         res.send('Product ' + user._id + ' deleted successfully!');
     })
 };
+
+exports.user_zip = function (req, res, next) {
+    User.aggregate([{$project: {city: "$address.city", zip: "$address.zip"}}, { $group: { _id: {$max: "$city"}, zipo: {$max: "$zip"}}}])
+        .then(  result => {res.send(result); },
+                err => { next(err)});
+};
