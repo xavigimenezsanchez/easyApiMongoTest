@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "loadProjects": "node ./Utils/loadProjects.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
+    "csv-parse": "^4.3.4",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "mongodb": "^3.1.13",

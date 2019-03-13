@@ -36,3 +36,27 @@ exports.product_delete = function (req, res) {
         res.send('Product ' + product._id + ' deleted successfully!');
     })
 };
+
+/**
+ * Map-Reduce examples
+ * https://github.com/Automattic/mongoose/blob/master/examples/mapreduce/mapreduce.js
+ */
+let o = {
+    map: function() {
+        emit(this.type, this.price);
+    },
+    reduce: function(id, prices) {
+        return Array.sum(prices);
+    },
+    verbose: true
+};
+
+exports.product_SumPrices = function (req, res, next) {
+    Product.mapReduce(o, function(err, results, stats) {
+        if (err) {
+            next(err);
+        }
+        res.send(results);
+        console.log(stats);
+    })
+};

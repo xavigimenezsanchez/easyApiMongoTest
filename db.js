@@ -13,7 +13,6 @@ db.once('open', function() {
 
 function connect () {
     mongoose.set('useFindAndModify', false);
-    mongoose.connect(url + dbName);
-    mongoose.Promise = global.Promise;
+    return   mongoose.connect(url + dbName, () => mongoose.Promise = global.Promise);
 }
 module.exports = connect;
