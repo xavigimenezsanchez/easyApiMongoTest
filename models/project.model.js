@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let ProjectSchema = new Schema({
-        'UID' : {type: String, required: true, unique: true },
+        UID : {type: String, required: true, unique: true },
         Name: {type: String, required: true, max: 255 },
         Start:   {type: Date },
         Finish:  {type: Date },

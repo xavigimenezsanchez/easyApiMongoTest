@@ -1,8 +1,8 @@
 var fs = require('fs');
 var parse = require('csv-parse');
 var mongo = require('../db');
-var Project = require('../models/project.model');
-var projects = [];
+var Resource = require('../models/resource.model');
+var resources = [];
 
 
 mongo().then((db)=>{
@@ -27,18 +27,18 @@ mongo().then((db)=>{
                         }
                 );
 
-    fs.createReadStream('./Utils/projects.csv')
+    fs.createReadStream('./Utils/resources.csv')
             .pipe(parser)
             .on('data', function(data){
                 try {
-                    projects.push(parseNull(data));
+                    resources.push(parseNull(data));
                 }
                 catch(err) {
                     console.error(err);
                 }
             })
             .on('end',function(){
-                Project.insertMany(projects,
+                Resource.insertMany(resources,
                                     (err,doc) => {
                                         if (err) {
                                             console.error(err);
