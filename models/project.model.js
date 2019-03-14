@@ -11,6 +11,7 @@ let ProjectSchema = new Schema({
         ExternalUID: {type: String, max: 80},
         Comment: {type: String, max: 80},
         Active: {type: Boolean },
+        Tasks: {type: [Schema.Types.ObjectId], ref: "Task", required: true, default:[]},
         CheckedOut: {type: Date },
         CheckedOutBy: {type: String},
         LastCalculated: {type: Date },

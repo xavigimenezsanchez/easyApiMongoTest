@@ -1,6 +1,6 @@
 const Product = require('../models/product.model');
 
-exports.product_create = function (req, res) {
+exports.product_create = function (req, res, next) {
     let product = new Product(
         {
             name: req.body.name,

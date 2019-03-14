@@ -39,7 +39,6 @@ mongo().then((db)=>{
                 let counter = 0,
                     count = () => ++counter===(tasks.length - 1)?eventDb.emit('done',db):null;
 
-
                 tasks.forEach((task) => {
                     Project.findOne({ UID: task.ProjectUID }, (err, project) => {
                         if (err) {
@@ -51,16 +50,6 @@ mongo().then((db)=>{
                         newTask.save(()=>count());
                     })
                 })
-                // Task.insertMany(tasks,
-                //                     (err,doc) => {
-                //                         if (err) {
-                //                             console.error(err);
-                //                         }
-                //                         console.log("Load finished");
-                //                         db.connection.close(()=>console.warn("Moongoose connection disconnected"));
-                //                     });
-                    
-
             });  
     });
 

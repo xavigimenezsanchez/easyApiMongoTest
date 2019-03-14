@@ -9,6 +9,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users.route');
 const mongoRouter = require('./routes/mongo');
 const productRouter = require('./routes/product.route');
+const projectRouter = require('./routes/task.route');
 
 mongo();
 
@@ -26,5 +27,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/mongo',mongoRouter);
 app.use('/products', productRouter);
+app.use('/tasks', projectRouter);
 
 module.exports = app;

@@ -1,7 +1,7 @@
 // Model One-to-One Relationships with Embedded Documents
 
 const mongoose = require('mongoose');
-//const projectSchema = require('./project.model').schema;
+var Project = require('./project.model');
 const Schema = mongoose.Schema;
 
 let TaskSchema = new Schema({
@@ -30,7 +30,7 @@ let TaskSchema = new Schema({
         Lastmodifiedby: {type: String}
     });
 
-
+TaskSchema.post('save', (doc) => Project.findOneAndUpdate({_id: doc.Project}, {$push: {Tasks: doc._id}}));
 
 
 // Export the model
