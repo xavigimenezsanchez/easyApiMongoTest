@@ -11,9 +11,16 @@ let AddressSchema = new Schema({
 });
 
 let UserSchema = new Schema({
-    name: {type: String, required: true, max: 100},
-    surname: {type: String, required: true, max: 200},
-    address: AddressSchema
+    UID : {type: String, required: true, unique: true },
+    Name: {type: String, required: true, max: 255},
+    Email: {type: String, required: true, max: 255},
+    WindowsLogin: {type: String, required: true, max: 255},
+    ExternalUID: {type: String, max: 80},
+    address: AddressSchema,
+    LastUserLogin: {type: Date },
+    Created: {type: Date },
+    Lastmodified: {type: Date },
+    Lastmodifiedby: {type: String}
 });
 
 

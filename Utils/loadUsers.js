@@ -1,10 +1,16 @@
 const fs = require('fs');
+const EventEmitter = require('events'); 
+const eventDb = new EventEmitter();
 const parseNull = require('./parseNull');
 const parse = require('csv-parse');
 const mongo = require('../db');
-const Project = require('../models/project.model');
-const projects = [];
+const User = require('../models/User.model');
+let users = [];
 
+eventDb.on('done', (db) => {
+    console.log("Load finished");
+    db.connection.close(()=>console.warn("Moongoose connection disconnected"));
+} );
 
 mongo().then((db)=>{
     parser = parse({columns:header => header.map( column => column.trim())},
@@ -17,24 +23,27 @@ mongo().then((db)=>{
                         }
                 );
 
-    fs.createReadStream('./Utils/projects.csv')
+    fs.createReadStream('./Utils/users.csv')
             .pipe(parser)
             .on('data', function(data){
                 try {
-                    projects.push(parseNull(data));
+                    users.push(parseNull(data));
                 }
                 catch(err) {
                     console.error(err);
                 }
             })
             .on('end',function(){
-                Project.insertMany(projects,
-                                    (err,doc) => {
-                                        if (err) {
-                                            console.error(err);
-                                        }
-                                        console.log("Load finished");
-                                        db.connection.close(()=>console.warn("Moongoose connection disconnected"));
-                                    });
+                User.insertMany(users,
+                    (err,doc) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                        console.log("Load finished");
+                        db.connection.close(()=>console.warn("Moongoose connection disconnected"));
+                    });
             });  
     });
+
+
+

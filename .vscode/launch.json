@@ -7,6 +7,18 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "loadProjects",
+            "program": "${workspaceFolder}/Utils/loadProjects.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "loadTasks",
+            "program": "${workspaceFolder}/Utils/loadTasks.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}/bin/www"
         }
