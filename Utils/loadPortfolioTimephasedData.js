@@ -2,8 +2,9 @@ var fs = require('fs');
 var parse = require('csv-parse');
 const parseNull = require('./parseNull');
 var mongo = require('../db');
-var Resource = require('../models/resource.model');
-var resources = [];
+
+var PortfolioTimephasedData = require('../models/portfolioTimephasedData.model');
+var portfolioTimephasedData = [];
 
 
 mongo().then((db)=>{
@@ -17,18 +18,26 @@ mongo().then((db)=>{
                         }
                 );
 
-    fs.createReadStream('./Utils/resources.csv')
+    fs.createReadStream('./Utils/PortfolioTimephasedData.2.csv')
             .pipe(parser)
             .on('data', function(data){
                 try {
-                    resources.push(parseNull(data));
+                    portfolioTimephasedData.push(parseNull(data));
                 }
                 catch(err) {
                     console.error(err);
                 }
             })
             .on('end',function(){
-                Resource.insertMany(resources,
+                // let counter = 0,
+                //     count = () => ++counter===(tasks.length - 1)?eventDb.emit('done',db):null;
+                
+                // portfolioTimephasedData.forEach((timephase) => {
+                //     let portfolioTimephasedData = new PortfolioTimephasedData(timephase);
+                //     portfolioTimephasedData.save(count);
+                // }
+                // );
+                PortfolioTimephasedData.insertMany(portfolioTimephasedData,
                                     (err,doc) => {
                                         if (err) {
                                             console.error(err);

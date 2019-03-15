@@ -7,6 +7,12 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "loadPortfolioAssignments",
+            "program": "${workspaceFolder}/Utils/loadPortfolioAssignments.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "loadProjects",
             "program": "${workspaceFolder}/Utils/loadProjects.js"
         },
